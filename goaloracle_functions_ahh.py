@@ -75,7 +75,7 @@ try:
     logo.putalpha(mask)
 
     frame_size = 5
-    frame_color = (255, 253, 208, 255)
+    frame_color = (0, 102, 255, 255)
     framed_size = (size[0] + frame_size * 2, size[1] + frame_size * 2)
     framed = Image.new("RGBA", framed_size, (0, 0, 0, 0))
     draw_frame = ImageDraw.Draw(framed)
@@ -161,3 +161,4 @@ if predict:
 st.markdown("---")
 st.caption("GoalOracle — Mobile version. Poisson-based score prediction using λ values.")
 st.markdown("[Visit GoalOracle GitHub](https://github.com/your-repo)")
+
