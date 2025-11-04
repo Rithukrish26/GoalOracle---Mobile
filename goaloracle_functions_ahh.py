@@ -65,7 +65,7 @@ button:hover {
 
 # --- Header (Logo + Title) -------------------------------------------------
 try:
-    logo = Image.open("Goal Oracle.png").convert("RGBA")
+    logo = Image.open("Guluguluoracle.png").convert("RGBA")
     size = (100, 100)
     logo = logo.resize(size)
 
@@ -153,5 +153,6 @@ if predict:
 st.markdown("---")
 st.caption("GoalOracle — Mobile version. Poisson-based score prediction using λ values.")
 st.markdown("[Visit GoalOracle GitHub](https://github.com/your-repo)")
+
 
 
