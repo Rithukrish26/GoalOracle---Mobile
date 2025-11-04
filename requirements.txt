@@ -3,5 +3,3 @@ numpy
 matplotlib
 scipy
 pillow
-io
-base64
