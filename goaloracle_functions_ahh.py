@@ -27,38 +27,26 @@ def most_probable_score(prob_matrix):
     idx = np.unravel_index(np.argmax(prob_matrix), prob_matrix.shape)
     return idx, prob_matrix[idx]
 
-# --- Custom CSS for mobile ---
+# --- Custom CSS for glow buttons ---
 st.markdown("""
 <style>
-/* Center header */
-.centered-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Input section header */
-.input-header {
-    text-align: center;
-    color: #003366; 
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/* Buttons side by side */
-.stButton>button {
-    width: 120px !important;
-    height: 50px !important;
-    font-size: 16px !important;
-    border-radius: 12px !important;
+/* Glow effect for all buttons */
+.stButton>button, div.stNumberInput > div > button {
     background-color: #00D0C0 !important;
     color: black !important;
-    transition: all 0.3s ease;
+    font-size: 16px !important;
+    font-weight: bold;
+    height: 50px !important;
+    width: 120px !important;
+    border-radius: 12px !important;
+    border: none !important;
+    transition: 0.3s ease;
+    box-shadow: 0 0 10px #00d0c0, 0 0 20px #00d0c0, 0 0 30px #00d0c0;
 }
-.stButton>button:hover {
-    background-color: #00a89c !important;
-    box-shadow: 0px 0px 12px rgba(0,208,192,0.7) !important;
+.stButton>button:hover, div.stNumberInput > div > button:hover {
+    box-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 40px #00ffff;
+    background-color: #00FFFF !important;
+    color: black !important;
 }
 </style>
 """, unsafe_allow_html=True)
