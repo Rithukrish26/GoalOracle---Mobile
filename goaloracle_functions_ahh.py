@@ -44,8 +44,8 @@ st.markdown("""
 }
 
 button:hover {
-    box-shadow: 0px 0px 20px rgba(0,208,192, 0.7) !important;
-    background-color: #00D0C0 !important;
+    box-shadow: 0px 0px 20px rgba(0, 198, 255, 0.7) !important;
+    background-color: #00C6FF !important;
     color: black !important;
 }
 </style>
@@ -137,4 +137,5 @@ if predict:
 
 st.markdown("---")
 st.caption("GoalOracle — Mobile Poisson-based score prediction using the 'Goals Scored' inputs as λ for each team.") 
+
 
