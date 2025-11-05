@@ -47,24 +47,18 @@ st.markdown("""
 }
 
 /* Buttons side by side */
-.center-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-button[kind="primary"], button[kind="secondary"] {
-    width: 45% !important;
-    font-size: 18px !important;
+.stButton>button {
+    width: 120px !important;
     height: 50px !important;
-    border-radius: 10px !important;
-    transition: all 0.3s ease !important;
-}
-button:hover {
-    box-shadow: 0px 0px 15px rgba(0,208,192, 0.7) !important;
+    font-size: 16px !important;
+    border-radius: 12px !important;
     background-color: #00D0C0 !important;
     color: black !important;
+    transition: all 0.3s ease;
+}
+.stButton>button:hover {
+    background-color: #00a89c !important;
+    box-shadow: 0px 0px 12px rgba(0,208,192,0.7) !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -74,7 +68,7 @@ logo = Image.open("Guluguluoracleaura.png")
 
 # Resize proportionally for mobile
 width, height = logo.size
-scale_factor = 0.5  # smaller for phone
+scale_factor = 0.5
 new_width = int(width * scale_factor)
 new_height = int(height * scale_factor)
 logo = logo.resize((new_width, new_height))
@@ -111,12 +105,11 @@ tb_poss = st.number_input("Possession (%)", min_value=0.0, max_value=100.0, valu
 tb_pass = st.number_input("Pass Completion (%)", min_value=0.0, max_value=100.0, value=79.0, step=0.1)
 
 # --- Buttons ---
-col_pred, col_reset = st.columns([1,1], gap="small")  # two equal columns
-with col_pred:
+col1, col2 = st.columns([1,1])
+with col1:
     predict = st.button("Predict")
-with col_reset:
+with col2:
     reset = st.button("Reset")
-
 
 # --- Logic ---
 if reset:
@@ -142,7 +135,7 @@ if predict:
         st.markdown("---")
 
         fig, ax = plt.subplots()
-        im = ax.imshow(prob_matrix, origin='lower', aspect='auto')
+        im = ax.imshow(prob_matrix, origin='lower', aspect='auto', cmap='coolwarm')
         ax.set_xlabel('Team B Goals')
         ax.set_ylabel('Team A Goals')
         ax.set_title('Score Probability Matrix')
@@ -158,5 +151,4 @@ if predict:
         st.error(f"Invalid input detected: {e}")
 
 st.markdown("---")
-st.caption("GoalOracle — Mobile Poisson-based score prediction using the 'Goals Scored' inputs as λ for each team.")
-
+st.caption("GoalOracle — Mobile Poisson-based score prediction using the 'Goals Scored' inputs as λ for each team.") 
