@@ -41,8 +41,6 @@ st.markdown("""
     background-color: black !important;
     color: white !important;
     font-size: 17px !important;
-    font-weight: bold;
-    height: 50px !important;
     border-radius: 10px !important;
     border: none !important;
     transition: all 0.25s ease;
@@ -50,22 +48,32 @@ st.markdown("""
 .stButton>button:hover, div.stNumberInput > div > button:hover {
     background-color: #00D0C0 !important;
     color: black !important;
-    box-shadow: 0 0 10px #00D0C0, 0 0 20px #00D0C0, 0 0 30px #00D0C0;
+    box-shadow: 0 0 10px #00D0C0, 0 0 20px #00D0C0, 0 0 40px #00D0C0;
 }
-.stButton>button {width: 90% !important;}
+.center-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+button[kind="primary"], button[kind="secondary"] {
+    width: 45% !important;
+    height: 50px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
 try:
     logo = Image.open("Guluguluoracleaura.png")
-    width, height = logo.size
-    logo = logo.resize((int(width * 0.5), int(height * 0.5)))
-    buffered = BytesIO()
-    logo.save(buffered, format="PNG")
-    encoded_logo = base64.b64encode(buffered.getvalue()).decode()
+    w, h = logo.size
+    logo = logo.resize((int(w * 0.5), int(h * 0.5)))
+    buf = BytesIO()
+    logo.save(buf, format="PNG")
+    encoded_logo = base64.b64encode(buf.getvalue()).decode()
     st.markdown(f"<div style='display:flex;justify-content:center;'><img src='data:image/png;base64,{encoded_logo}'></div>", unsafe_allow_html=True)
 except Exception:
-    st.markdown("<h2 style='text-align:center'>GoalOracle ⚽</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align:center;'>GoalOracle ⚽</h2>", unsafe_allow_html=True)
 
 st.markdown("<h3 style='text-align:center;'>Team A — Inputs</h3>", unsafe_allow_html=True)
 ta_goals = st.number_input("Goals Scored (λ)", 0.0, value=DEFAULTS["ta_goals"], step=0.1, key="ta_goals")
@@ -83,28 +91,28 @@ tb_chances = st.number_input("Chances Created", 0.0, value=DEFAULTS["tb_chances"
 tb_poss = st.number_input("Possession (%)", 0.0, 100.0, value=DEFAULTS["tb_poss"], step=0.1, key="tb_poss")
 tb_pass = st.number_input("Pass Completion (%)", 0.0, 100.0, value=DEFAULTS["tb_pass"], step=0.1, key="tb_pass")
 
-col1, col2 = st.columns([1,1])
+col1, col2 = st.columns([1, 1], gap="small")
 with col1:
     predict = st.button("Predict")
 with col2:
     st.button("Reset", on_click=reset_inputs)
 
 if predict:
-    lambda_a, lambda_b = st.session_state.get("ta_goals", DEFAULTS["ta_goals"]), st.session_state.get("tb_goals", DEFAULTS["tb_goals"])
-    prob_matrix = calculate_score_probabilities(lambda_a, lambda_b)
-    win_a, draw, win_b = calculate_outcome_probabilities(prob_matrix)
-    (best_i, best_j), best_p = most_probable_score(prob_matrix)
+    λa, λb = st.session_state["ta_goals"], st.session_state["tb_goals"]
+    prob = calculate_score_probabilities(λa, λb)
+    win_a, draw, win_b = calculate_outcome_probabilities(prob)
+    (best_i, best_j), best_p = most_probable_score(prob)
     st.subheader("Prediction Results")
     st.write(f"Most Probable Score: {best_i} - {best_j} ({best_p:.2%})")
     st.write(f"Team A Win: {win_a:.2%} | Draw: {draw:.2%} | Team B Win: {win_b:.2%}")
     st.markdown("---")
     fig, ax = plt.subplots()
-    im = ax.imshow(prob_matrix, origin='lower', aspect='auto', cmap='coolwarm')
+    im = ax.imshow(prob, origin='lower', aspect='auto', cmap='coolwarm')
     ax.set_xlabel('Team B Goals')
     ax.set_ylabel('Team A Goals')
-    for i in range(prob_matrix.shape[0]):
-        for j in range(prob_matrix.shape[1]):
-            p = prob_matrix[i, j]
+    for i in range(prob.shape[0]):
+        for j in range(prob.shape[1]):
+            p = prob[i, j]
             if p > 0.001:
                 ax.text(j, i, f"{p:.1%}", ha='center', va='center', fontsize=8)
     fig.colorbar(im, ax=ax)
