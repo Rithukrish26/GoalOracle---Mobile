@@ -111,10 +111,12 @@ tb_poss = st.number_input("Possession (%)", min_value=0.0, max_value=100.0, valu
 tb_pass = st.number_input("Pass Completion (%)", min_value=0.0, max_value=100.0, value=79.0, step=0.1)
 
 # --- Buttons ---
-st.markdown("<div class='center-buttons'>", unsafe_allow_html=True)
-predict = st.button("Predict")
-reset = st.button("Reset")
-st.markdown("</div>", unsafe_allow_html=True)
+col_pred, col_reset = st.columns([1,1], gap="small")  # two equal columns
+with col_pred:
+    predict = st.button("Predict")
+with col_reset:
+    reset = st.button("Reset")
+
 
 # --- Logic ---
 if reset:
@@ -157,3 +159,4 @@ if predict:
 
 st.markdown("---")
 st.caption("GoalOracle — Mobile Poisson-based score prediction using the 'Goals Scored' inputs as λ for each team.")
+
