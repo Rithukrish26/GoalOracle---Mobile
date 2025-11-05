@@ -27,26 +27,27 @@ def most_probable_score(prob_matrix):
     idx = np.unravel_index(np.argmax(prob_matrix), prob_matrix.shape)
     return idx, prob_matrix[idx]
 
-# --- Custom CSS for glow buttons ---
+# --- Custom CSS for hover-glow buttons ---
 st.markdown("""
 <style>
-/* Glow effect for all buttons */
+/* Default black button, glow on hover */
 .stButton>button, div.stNumberInput > div > button {
-    background-color: #00D0C0 !important;
-    color: black !important;
+    background-color: black !important;
+    color: white !important;
     font-size: 16px !important;
     font-weight: bold;
     height: 50px !important;
     width: 120px !important;
     border-radius: 12px !important;
     border: none !important;
-    transition: 0.3s ease;
-    box-shadow: 0 0 10px #00d0c0, 0 0 20px #00d0c0, 0 0 30px #00d0c0;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
 }
+
+/* Glow effect on hover */
 .stButton>button:hover, div.stNumberInput > div > button:hover {
-    box-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 40px #00ffff;
-    background-color: #00FFFF !important;
-    color: black !important;
+    box-shadow: 0 0 10px #00D0C0, 0 0 20px #00D0C0, 0 0 30px #00D0C0;
+    color: #00D0C0 !important;
 }
 </style>
 """, unsafe_allow_html=True)
