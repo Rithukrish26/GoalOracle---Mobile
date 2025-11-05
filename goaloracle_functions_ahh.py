@@ -49,9 +49,9 @@ st.markdown("""
     text-align: center !important;
 }
 .stButton>button:hover {
-    background-color: #00D0C0 !important;
+    background-color: #00C6FF !important;
     color: black !important;
-    box-shadow: 0 0 10px #00D0C0, 0 0 20px #00D0C0, 0 0 40px #00D0C0;
+    box-shadow: 0 0 10px #00C6FF, 0 0 20px #00C6FF, 0 0 40px #00C6FF;
 }
 div.stNumberInput > div > button {
     background-color: black !important;
@@ -128,3 +128,4 @@ if predict:
 
 st.markdown("---")
 st.caption("GoalOracle — Mobile Poisson-based score prediction.")
+
