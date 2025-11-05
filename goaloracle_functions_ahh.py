@@ -30,7 +30,7 @@ def most_probable_score(prob_matrix):
 # --- Custom CSS for hover-glow buttons ---
 st.markdown("""
 <style>
-/* Default black button, glow on hover */
+/* Default black buttons */
 .stButton>button, div.stNumberInput > div > button {
     background-color: black !important;
     color: white !important;
@@ -41,28 +41,25 @@ st.markdown("""
     border-radius: 12px !important;
     border: none !important;
     transition: all 0.3s ease;
-    box-shadow: none !important;
 }
 
-/* Glow effect on hover */
+/* Glow and cyan background on hover */
 .stButton>button:hover, div.stNumberInput > div > button:hover {
+    background-color: #00D0C0 !important;
+    color: black !important;
     box-shadow: 0 0 10px #00D0C0, 0 0 20px #00D0C0, 0 0 30px #00D0C0;
-    color: #00D0C0 !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # --- Logo Section ---
 logo = Image.open("Guluguluoracleaura.png")
-
-# Resize proportionally for mobile
 width, height = logo.size
 scale_factor = 0.5
 new_width = int(width * scale_factor)
 new_height = int(height * scale_factor)
 logo = logo.resize((new_width, new_height))
 
-# Convert to base64 for HTML embedding
 buffered = BytesIO()
 logo.save(buffered, format="PNG")
 encoded_logo = base64.b64encode(buffered.getvalue()).decode()
