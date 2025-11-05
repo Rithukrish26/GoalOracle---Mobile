@@ -37,30 +37,38 @@ def reset_inputs():
 
 st.markdown("""
 <style>
-.stButton>button, div.stNumberInput > div > button {
+.stButton>button {
     background-color: black !important;
     color: white !important;
     font-size: 17px !important;
+    padding: 10px 18px !important;
     border-radius: 10px !important;
     border: none !important;
     transition: all 0.25s ease;
+    white-space: nowrap !important;
+    text-align: center !important;
 }
-.stButton>button:hover, div.stNumberInput > div > button:hover {
+.stButton>button:hover {
     background-color: #00D0C0 !important;
     color: black !important;
     box-shadow: 0 0 10px #00D0C0, 0 0 20px #00D0C0, 0 0 40px #00D0C0;
 }
-.center-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    margin-bottom: 15px;
+div.stNumberInput > div > button {
+    background-color: black !important;
+    color: white !important;
+    padding: 6px 10px !important;
+    min-width: 30px !important;
+    height: 36px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    transition: all 0.18s ease;
 }
-button[kind="primary"], button[kind="secondary"] {
-    width: 45% !important;
-    height: 50px !important;
+div.stNumberInput > div > button:hover {
+    background-color: #00D0C0 !important;
+    color: black !important;
+    box-shadow: 0 0 8px #00D0C0, 0 0 16px #00D0C0;
 }
+.center-buttons { display:flex; justify-content:center; gap:10px; margin-top:12px; margin-bottom:12px; }
 </style>
 """, unsafe_allow_html=True)
 
